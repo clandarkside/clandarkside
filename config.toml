@@ -1,10 +1,10 @@
-baseURL = "https://radkowskij.github.io/teamdarkside/"
+baseURL = "https://www.teamdarkside.net/"
 languageCode = "en-us"
 title = "Team DarkSide"
 
 enableRobotsTXT = true
 
-relativeURLs = false
+relativeURLs = true
 
 [params]
   description = "Competitive FPS squad - match recaps, roster updates, and team stories."
