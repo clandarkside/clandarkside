@@ -9,3 +9,7 @@ enableRobotsTXT = true
 
 [taxonomies]
   squad = "squads"
+
+[caches]
+  [caches.images]
+    dir = ':cacheDir/images'
