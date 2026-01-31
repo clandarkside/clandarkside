@@ -4,7 +4,7 @@ title = "Team DarkSide"
 
 enableRobotsTXT = true
 
-relativeURLs = false
+relativeURLs = true
 
 [params]
   description = "Competitive FPS squad - match recaps, roster updates, and team stories."
