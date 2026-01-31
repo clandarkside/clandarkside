@@ -1,0 +1,17 @@
+{{ define "main" }}
+  <section class="page-hero">
+    <div class="wrap">
+      <h1>{{ .Title }}</h1>
+      {{ if or .Date .Params.author }}
+        <p class="meta">
+          {{ if .Date }}{{ .Date.Format "Jan 2, 2006" }}{{ end }}
+          {{ if and .Date .Params.author }} • {{ end }}
+          {{ if .Params.author }}By {{ .Params.author }}{{ end }}
+        </p>
+      {{ end }}
+    </div>
+  </section>
+  <section class="wrap prose">
+    {{ .Content }}
+  </section>
+{{ end }}

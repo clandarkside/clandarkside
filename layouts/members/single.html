@@ -1,0 +1,49 @@
+{{ define "main" }}
+  <section class="page-hero">
+    <div class="wrap">
+      <div class="member-hero-row" style="display:flex;align-items:center;gap:18px;">
+        {{ with .Params.image }}
+          <img class="member-avatar member-avatar-lg" src="{{ . | relURL }}" alt="{{ $.Title }} avatar" width="96" height="96" loading="lazy">
+        {{ end }}
+        <div class="member-hero-body" style="flex:1;min-width:0;">
+          <h1>{{ .Params.handle | default .Title }}</h1>
+          {{ if .Params.handle }}<p class="tag">{{ .Title }}</p>{{ end }}
+          {{ with .Params.active }}<p class="meta">Active: {{ . }}</p>{{ end }}
+          {{ $rawRoles := .Params.roles | default .Params.role }}
+          {{ if $rawRoles }}
+            <div class="role-row">
+              {{ if reflect.IsSlice $rawRoles }}
+                {{ range $rawRoles }}
+                  <span class="role-chip">{{ . }}</span>
+                {{ end }}
+              {{ else }}
+                <span class="role-chip">{{ $rawRoles }}</span>
+              {{ end }}
+            </div>
+          {{ end }}
+          <div class="chip-row">
+            {{ $status := lower (default "active" .Params.status) }}
+            <span class="chip status-{{ $status }}">{{ title $status }}</span>
+            {{ $rawSquads := .Params.squads }}
+            {{ $memberSquads := slice }}
+            {{ if $rawSquads }}
+              {{ if reflect.IsSlice $rawSquads }}
+                {{ $memberSquads = $rawSquads }}
+              {{ else }}
+                {{ $memberSquads = slice $rawSquads }}
+              {{ end }}
+            {{ else }}
+              {{ $memberSquads = slice "Unassigned" }}
+            {{ end }}
+            {{ range $memberSquads }}
+              <span class="chip squad-chip">{{ . }}</span>
+            {{ end }}
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+  <section class="wrap prose">
+    {{ .Content }}
+  </section>
+{{ end }}

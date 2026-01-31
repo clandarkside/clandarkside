@@ -1,0 +1,46 @@
+{{ define "main" }}
+  <section class="page-hero">
+    <div class="wrap">
+      <h1>{{ .Title }}</h1>
+      <p class="meta">
+        {{ with .Params.event }}{{ . }}{{ end }}
+        {{ with .Params.opponent }}{{ if $.Params.event }} | {{ end }}vs {{ . }}{{ end }}
+        {{ if .Date }} | {{ .Date.Format "Jan 2, 2006" }}{{ end }}
+      </p>
+      {{ with .Params.result }}<p class="badge">{{ . }}</p>{{ end }}
+    </div>
+  </section>
+  <section class="wrap">
+    <aside class="match-maps">
+      <h2>Map Scores</h2>
+      {{ if .Params.maps }}
+        <ul class="map-listing">
+          {{ range $index, $map := .Params.maps }}
+            {{ $img := "images/maps/placeholder.svg" }}
+            {{ with $map.image }}{{ $img = . }}{{ end }}
+            <li>
+              <img class="map-image" src="{{ $img | relURL }}" alt="{{ $map.name }} screenshot" width="200" height="200" loading="lazy">
+              <div class="map-meta">
+                <span class="map-name">{{ $map.name }}</span>
+                <span class="map-score">{{ $map.our_score }} - {{ $map.their_score }}</span>
+              </div>
+            </li>
+          {{ end }}
+        </ul>
+      {{ else }}
+        <p>No maps recorded.</p>
+      {{ end }}
+    </aside>
+    <div class="match-grid">
+      <div class="match-recap">
+        {{ .Content }}
+      </div>
+    </div>
+    {{ with .Params.notes }}
+      <div class="callout">
+        <strong>Coach Notes</strong>
+        <p>{{ . }}</p>
+      </div>
+    {{ end }}
+  </section>
+{{ end }}

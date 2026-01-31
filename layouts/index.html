@@ -1,0 +1,71 @@
+{{ define "main" }}
+  <section class="hero">
+    <div class="wrap">
+      <p class="tag">Competitive FPS Team</p>
+      <h1>Precision, teamwork, and the grind.</h1>
+      <p class="lede">{{ .Site.Params.description }}</p>
+      <div class="cta">
+        <a class="button" href="{{ "/matches/" | relURL }}">Latest Matches</a>
+        <a class="button ghost" href="{{ "/members/" | relURL }}">Meet the Roster</a>
+      </div>
+    </div>
+  </section>
+  <section class="wrap split">
+    <div>
+      <h2>Latest Blog</h2>
+      {{ range first 3 (where .Site.RegularPages "Section" "blog") }}
+        <article class="card">
+          <h3><a href="{{ .RelPermalink }}">{{ .Title }}</a></h3>
+          {{ if or .Date .Params.author }}
+            <p class="meta">
+              {{ if .Date }}{{ .Date.Format "Jan 2, 2006" }}{{ end }}
+              {{ if and .Date .Params.author }} • {{ end }}
+              {{ if .Params.author }}By {{ .Params.author }}{{ end }}
+            </p>
+          {{ end }}
+          {{ with .Summary }}<p>{{ . }}</p>{{ end }}
+        </article>
+      {{ else }}
+        <p>No posts yet.</p>
+      {{ end }}
+    </div>
+    <div>
+      <h2>Recent Matches</h2>
+      {{ $recentMatches := first 3 (where .Site.RegularPages "Section" "matches") }}
+      {{ if $recentMatches }}
+        <div class="table-wrap">
+          <table class="match-table">
+            <thead>
+              <tr>
+                <th>Match</th>
+                <th>Opponent</th>
+                <th>Score</th>
+              </tr>
+            </thead>
+            <tbody>
+              {{ range $recentMatches }}
+                <tr>
+                  <td>
+                    <a class="match-link" href="{{ .RelPermalink }}">{{ .Title }}</a>
+                    {{ with .Date }}<span class="meta">{{ .Format "Jan 2, 2006" }}</span>{{ end }}
+                    {{ with .Params.maps }}
+                      <div class="map-list">
+                        {{ range . }}
+                          {{ with .name }}<span class="map-chip">{{ . }}</span>{{ end }}
+                        {{ end }}
+                      </div>
+                    {{ end }}
+                  </td>
+                  <td>{{ with .Params.opponent }}vs {{ . }}{{ end }}</td>
+                  <td>{{ with .Params.result }}{{ . }}{{ end }}</td>
+                </tr>
+              {{ end }}
+            </tbody>
+          </table>
+        </div>
+      {{ else }}
+        <p>No matches recorded yet.</p>
+      {{ end }}
+    </div>
+  </section>
+{{ end }}

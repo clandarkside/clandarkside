@@ -1,0 +1,21 @@
+{{ define "main" }}
+  <section class="page-hero">
+    <div class="wrap">
+      <h1>{{ .Title }}</h1>
+      {{ with .Params.description }}<p class="lede">{{ . }}</p>{{ end }}
+    </div>
+  </section>
+  <section class="wrap grid">
+    {{ range .Pages }}
+      <article class="card">
+        <h2><a href="{{ .RelPermalink }}">{{ .Title }}</a></h2>
+        {{ with .Summary }}<p>{{ . }}</p>{{ end }}
+        <p class="meta">
+          {{ if .Date }}{{ .Date.Format "Jan 2, 2006" }}{{ end }}
+          {{ if and .Date .Params.author }} • {{ end }}
+          {{ if .Params.author }}By {{ .Params.author }}{{ end }}
+        </p>
+      </article>
+    {{ end }}
+  </section>
+{{ end }}

@@ -1,0 +1,15 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 600 400" role="img" aria-label="Map screenshot placeholder">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#121620" />
+      <stop offset="100%" stop-color="#24304a" />
+    </linearGradient>
+  </defs>
+  <rect width="600" height="400" fill="url(#bg)" />
+  <rect x="60" y="70" width="480" height="220" rx="18" fill="#1b2233" stroke="#2e3a52" stroke-width="2" />
+  <rect x="90" y="110" width="180" height="120" rx="12" fill="#2a3348" />
+  <rect x="290" y="110" width="220" height="26" rx="13" fill="#2a3348" />
+  <rect x="290" y="150" width="220" height="26" rx="13" fill="#2a3348" />
+  <rect x="290" y="190" width="180" height="26" rx="13" fill="#2a3348" />
+  <rect x="90" y="320" width="420" height="24" rx="12" fill="#313d55" />
+</svg>

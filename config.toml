@@ -1,0 +1,11 @@
+baseURL = "https://teamdarkside.github.io/"
+languageCode = "en-us"
+title = "Team DarkSide"
+
+enableRobotsTXT = true
+
+[params]
+  description = "Competitive FPS squad - match recaps, roster updates, and team stories."
+
+[taxonomies]
+  squad = "squads"

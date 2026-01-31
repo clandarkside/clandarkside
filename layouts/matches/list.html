@@ -1,0 +1,40 @@
+{{ define "main" }}
+  <section class="page-hero">
+    <div class="wrap">
+      <h1>{{ .Title }}</h1>
+      <p class="lede">Match recaps with map-by-map scores.</p>
+    </div>
+  </section>
+  <section class="wrap">
+    <div class="table-wrap">
+      <table class="match-table">
+        <thead>
+          <tr>
+            <th>Match</th>
+            <th>Opponent</th>
+            <th>Score</th>
+          </tr>
+        </thead>
+        <tbody>
+          {{ range .Pages }}
+            <tr>
+              <td>
+                <a class="match-link" href="{{ .RelPermalink }}">{{ .Title }}</a>
+                <span class="meta">{{ .Date.Format "Jan 2, 2006" }}</span>
+                {{ with .Params.maps }}
+                  <div class="map-list">
+                    {{ range . }}
+                      {{ with .name }}<span class="map-chip">{{ . }}</span>{{ end }}
+                    {{ end }}
+                  </div>
+                {{ end }}
+              </td>
+              <td>{{ with .Params.opponent }}vs {{ . }}{{ end }}</td>
+              <td>{{ with .Params.result }}{{ . }}{{ end }}</td>
+            </tr>
+          {{ end }}
+        </tbody>
+      </table>
+    </div>
+  </section>
+{{ end }}

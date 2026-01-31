@@ -1,0 +1,72 @@
+{{ define "main" }}
+  <section class="page-hero">
+    <div class="wrap">
+      <h1>{{ .Title }}</h1>
+      <p class="lede">Active, Inactive, and Former members of the team.</p>
+    </div>
+  </section>
+  <section class="wrap">
+    {{ $members := .Pages }}
+    {{ $statuses := slice "active" "inactive" "legacy" }}
+    {{ range $status := $statuses }}
+      {{ $statusMembers := where $members "Params.status" $status }}
+      {{ if gt (len $statusMembers) 0 }}
+        <div class="status-block">
+          <h2 class="status-title">{{ title $status }}</h2>
+          <div class="member-grid">
+            {{ range $statusMembers }}
+              <article class="card member-card">
+                {{ $memberTitle := .Title }}
+                <div class="member-card-row">
+                  <div class="member-card-body">
+                    <h3><a href="{{ .RelPermalink }}">{{ .Params.handle | default .Title }}</a></h3>
+                    {{ $rawRoles := .Params.roles | default .Params.role }}
+                    {{ if $rawRoles }}
+                      <div class="role-row">
+                        {{ if reflect.IsSlice $rawRoles }}
+                          {{ range $rawRoles }}
+                            <span class="role-chip">{{ . }}</span>
+                          {{ end }}
+                        {{ else }}
+                          <span class="role-chip">{{ $rawRoles }}</span>
+                        {{ end }}
+                      </div>
+                    {{ end }}
+                    {{ if .Params.handle }}
+                      <p class="tag">{{ .Title }}</p>
+                    {{ end }}
+                    {{ with .Params.active }}
+                      <p class="meta">Active: {{ . }}</p>
+                    {{ end }}
+                    <div class="chip-row">
+                      {{ $memberStatus := .Params.status }}
+                      <span class="chip status-{{ $memberStatus }}">{{ title $memberStatus }}</span>
+                      {{ $rawSquads := .Params.squads }}
+                      {{ $memberSquads := slice }}
+                      {{ if $rawSquads }}
+                        {{ if reflect.IsSlice $rawSquads }}
+                          {{ $memberSquads = $rawSquads }}
+                        {{ else }}
+                          {{ $memberSquads = slice $rawSquads }}
+                        {{ end }}
+                      {{ else }}
+                        {{ $memberSquads = slice "Unassigned" }}
+                      {{ end }}
+                      {{ range $memberSquads }}
+                        <span class="chip squad-chip">{{ . }}</span>
+                      {{ end }}
+                    </div>
+                  </div>
+                  {{ with .Params.image }}
+                    <img class="member-avatar" src="{{ . | relURL }}" alt="{{ $memberTitle }} avatar" width="48" height="48" loading="lazy">
+                  {{ end }}
+                </div>
+                {{ with .Summary }}<p class="member-summary">{{ . }}</p>{{ end }}
+              </article>
+            {{ end }}
+          </div>
+        </div>
+      {{ end }}
+    {{ end }}
+  </section>
+{{ end }}
