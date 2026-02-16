@@ -2,7 +2,6 @@
   <section class="page-hero">
     <div class="wrap">
       <h1>{{ .Title }}</h1>
-      <p class="lede">Match recaps with map-by-map scores.</p>
     </div>
   </section>
   <section class="wrap">
@@ -18,7 +17,8 @@
           </tr>
         </thead>
         <tbody>
-          {{ range .Pages }}
+          {{ $paginator := .Paginate .Pages 7 }}
+          {{ range $paginator.Pages }}
             <tr>
               <td>
                 <a class="match-link" href="{{ .RelPermalink }}">{{ .Title }}</a>
@@ -40,5 +40,25 @@
         </tbody>
       </table>
     </div>
+
+    {{ if gt $paginator.TotalPages 1 }}
+      <nav class="pagination">
+        <div class="pagination-controls">
+          {{ if $paginator.HasPrev }}
+            <a href="{{ $paginator.Prev.URL }}" class="button ghost">&larr; Newer</a>
+          {{ else }}
+            <span class="button ghost disabled">&larr; Newer</span>
+          {{ end }}
+
+          <span class="page-count">Page {{ $paginator.PageNumber }} of {{ $paginator.TotalPages }}</span>
+
+          {{ if $paginator.HasNext }}
+            <a href="{{ $paginator.Next.URL }}" class="button ghost">Older &rarr;</a>
+          {{ else }}
+            <span class="button ghost disabled">Older &rarr;</span>
+          {{ end }}
+        </div>
+      </nav>
+    {{ end }}
   </section>
 {{ end }}
