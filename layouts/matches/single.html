@@ -7,7 +7,10 @@
         {{ with .Params.opponent }}{{ if $.Params.event }} | {{ end }}vs {{ . }}{{ end }}
         {{ if .Date }} | {{ .Date.Format "Jan 2, 2006" }}{{ end }}
       </p>
-      {{ with .Params.result }}<p class="badge">{{ . }}</p>{{ end }}
+      <div class="badge-group">
+        {{ with .Params.result }}<span class="badge badge-{{ . | urlize }}">{{ . }}</span>{{ end }}
+        {{ with .Params.location }}<span class="badge badge-{{ . | urlize }}">{{ . }}</span>{{ end }}
+      </div>
     </div>
   </section>
   <section class="wrap">
@@ -31,15 +34,16 @@
         <p>No maps recorded.</p>
       {{ end }}
     </aside>
-    <div class="match-grid">
-      <div class="match-recap">
-        {{ .Content }}
-      </div>
-    </div>
-    {{ with .Params.notes }}
+    {{ with trim .Params.coach_notes " " }}
       <div class="callout">
         <strong>Coach Notes</strong>
         <p>{{ . }}</p>
+      </div>
+    {{ end }}
+    {{ with .Content }}
+      <div class="match-recap">
+        <h2>Match Recap</h2>
+        {{ . }}
       </div>
     {{ end }}
   </section>

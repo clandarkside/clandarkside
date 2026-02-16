@@ -38,8 +38,10 @@
             <thead>
               <tr>
                 <th>Match</th>
-                <th>Opponent</th>
+                <th>Event</th>
                 <th>Score</th>
+                <th>Result</th>
+                <th>Location</th>
               </tr>
             </thead>
             <tbody>
@@ -56,8 +58,10 @@
                       </div>
                     {{ end }}
                   </td>
-                  <td>{{ with .Params.opponent }}vs {{ . }}{{ end }}</td>
-                  <td>{{ with .Params.result }}{{ . }}{{ end }}</td>
+                  <td>{{ with .Params.event }}{{ . }}{{ end }}</td>
+                  <td>{{ with .Params.total_score }}{{ . }}{{ end }}</td>
+                  <td>{{ with .Params.result }}<span class="badge badge-{{ . | urlize }}">{{ . }}</span>{{ end }}</td>
+                  <td>{{ with .Params.location }}<span class="badge badge-{{ . | urlize }}">{{ . }}</span>{{ end }}</td>
                 </tr>
               {{ end }}
             </tbody>
