@@ -1,4 +1,4 @@
 ---
 title: "Members"
-description: "Meet the roster powering Team Darkside."
+description: "Meet the roster powering Clan Darkside."
 ---
