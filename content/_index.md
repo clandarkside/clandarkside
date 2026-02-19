@@ -1,3 +1,3 @@
 ---
-title: "Clan Darkside"
+title: "Team Darkside"
 ---

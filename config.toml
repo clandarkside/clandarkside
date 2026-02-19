@@ -1,6 +1,6 @@
-baseURL = "https://www.clandarkside.com/"
+baseURL = "https://www.teamdarkside.net/"
 languageCode = "en-us"
-title = "Clan Darkside"
+title = "Team Darkside"
 
 enableRobotsTXT = true
 
